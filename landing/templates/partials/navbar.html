@@ -1,0 +1,35 @@
+<!--Navbar-->
+    <!-- Account Dropdpwn -->
+    <ul id="account-drop" class="dropdown-content">
+        {% if request.user.is_authenticated %}
+        <li class="{% if active_tab == 'Login' %}active{% endif %}"><a href="{% url 'account:logout' %}">LogOut</a></li>
+        {% else %}
+        <li class="{% if active_tab == 'Login' %}active{% endif %}"><a href="{% url 'account:login' %}">Login</a></li>
+        <li class="{% if active_tab == 'SignUp' %}active{% endif %}"><a href="{% url 'account:register' %}">SignUp</a></li>
+        {% endif %}
+    </ul>
+
+    <!-- Main Navbar -->
+    <nav>
+        <div class="nav-wrapper">
+            <div class="container">
+                <a href="/" class="brand-logo">Home</a>
+            </div>
+            <a href="#" data-target="mobile-nav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <ul class="right hide-on-med-and-down">
+                <li class="{% if active_tab == 'Home' %}active{% endif %}"><a href="/">Home</a></li>
+                <li><a class="dropdown-trigger hover" data-target="account-drop">Account<i class="material-icons right">arrow_drop_down</i></a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Mobile Nav -->
+    <ul class="sidenav" id="mobile-nav">
+        <li><a href="/">Home</a></li>
+        {% if request.user.is_authenticated %}
+        <li class="{% if active_tab == 'Login' %}active{% endif %}"><a href="{% url 'account:logout' %}">LogOut</a></li>
+        {% else %}
+        <li class="{% if active_tab == 'Login' %}active{% endif %}"><a href="{% url 'account:login' %}">Login</a></li>
+        <li class="{% if active_tab == 'SignUp' %}active{% endif %}"><a href="{% url 'account:register' %}">SignUp</a></li>
+        {% endif %}
+    </ul>

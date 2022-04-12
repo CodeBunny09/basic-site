@@ -1,0 +1,48 @@
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    background-color: #FFFBE7;
+}
+
+main {
+flex: 1 0 auto;
+}
+
+nav {
+  background-color: #E78EA9;
+  width: 100%;
+}
+
+/* For highlighting the curent page */
+ul.tab-menu li a {
+    text-decoration: none;
+    color: #E78EA9;
+  }
+  
+  ul.tab-menu li.active a {
+    color: #E78EA9;
+}
+
+/* Login and Signup Form */
+.account-form {
+  margin:auto;
+  margin-top:5%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1);
+  background-color: #40DFEF;
+  color: black;
+}
+
+.account-form .btn {
+  background-color: #E78EA9;
+}
+/* To make the footer sticky */
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #E78EA9;
+    color: white;
+    text-align: center;
+  }
