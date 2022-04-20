@@ -3,13 +3,11 @@
 {% block title %} {{ title }} {% endblock title %}
 
 {% block body %}
-{% include "partials/navbar.html" with active_tab='LogIn' %}
-
 <div class="container">
     <div class="row">
         <div class="col account-form">
 
-            <form name="register" method="POST" action="{% url 'account:login' %}" class="col s12" id="reg-form">
+            <form name="addinfo" method="POST" action="{% url 'account:addinfo' %}" class="col s12" id="addinfo">
                 {% csrf_token %}
                 {{ form.as_p }}
                 {% if form.errors %}
@@ -17,12 +15,10 @@
                 {% endif %}
                 <!-- Button -->
                 <div class="input-field col s6 center">
-                    <button form="reg-form" value="Signup" class="btn btn-large btn-register waves-effect waves-light black" type="submit">LogIn</button>
+                    <button form="addinfo" value="AddInfo" class="btn btn-large btn-register waves-effect waves-light black" type="submit">Submit</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
-    
-
 {% endblock body %}

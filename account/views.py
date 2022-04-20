@@ -3,7 +3,8 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 
 from django.contrib.auth.forms import AuthenticationForm
-from .forms import RegisterForm
+from .forms import RegisterForm, UserMetaForm
+from account.models import User, UserMeta
 
 # Create your views here.
 
@@ -13,7 +14,7 @@ def register(req):
         form = RegisterForm(req.POST)
         if form.is_valid():
             new_user = form.save()
-            authenticate(req, username=form.cleaned_data['username'], password=form.cleaned_data['password1'])
+            new_user = authenticate(req, username=form.cleaned_data['email'], password=form.cleaned_data['password1'])
             login(req, new_user)
             return redirect("landing:home")
     else:
@@ -48,3 +49,27 @@ def logout_user(req):
     logout(req)
 
     return redirect("landing:home")
+
+@login_required
+def addinfo(req):
+
+    context = {}
+    if req.method == "POST":
+
+        form = UserMetaForm(req.POST)
+
+        if form.is_valid():
+            user = User.objects.get(email = req.user.email)
+            new_info = form.save(commit=False)
+            new_info.user = user
+            new_info.save()
+            return redirect("landing:home")
+    else:
+        form = UserMetaForm()
+        user = User.objects.get(email = req.user.email)
+        print(user, req.user)
+        context.update({
+            "form": form,
+            "title": "Add Info",
+        })
+        return render(req, 'addinfo.html', context)

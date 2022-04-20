@@ -7,8 +7,15 @@
 
 <div class="container">
     <h1>Hello</h1>
-    <h3>{{user}}</h3>
+    <h3>{{user.first_name}}</h3>
     <h2>!!</h2>
-</div>
+
+    {% if can_post %}
+        <p>You can create a post</p>
+        <p>Check the Organization Stats <a href="{% url 'stats:organization-stats' %}">here</a></p>
+    {% else %}
+        <p>This page is view only mode, to create posts, please complete your account <a href="{% url 'account:addinfo' %}">here</a></p>
+    {% endif %}
+    </div>
 
 {% endblock body %}

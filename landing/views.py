@@ -1,8 +1,17 @@
-from urllib import response
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+
+from account.models import UserMeta
 
 # Create your views here.
 
 def index(req):
-    context = {'name':req.user}
-    return render(req, "index.html", context)
+    if req.user.is_authenticated:
+        if(UserMeta.objects.filter(user = req.user).exists()):
+            can_post = True
+        else:
+            can_post = False
+
+        context = {'name':req.user, 'can_post': can_post}
+        return render(req, "index.html", context)
+    else:
+        return redirect("account:login")

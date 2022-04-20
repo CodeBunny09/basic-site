@@ -36,6 +36,13 @@ ul.tab-menu li a {
 .account-form .btn {
   background-color: #E78EA9;
 }
+
+/* Add Info Form */
+
+select {
+  display: block !important;
+}
+
 /* To make the footer sticky */
 .footer {
     position: fixed;
